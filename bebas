@@ -1,1 +1,28 @@
-bebas deh
+import pandas as pd
+
+# Baca dataset dari CSV dengan pemisah ';'
+df = pd.read_csv("data.csv", sep=";")
+
+print("=== Data Anggota ===")
+print(df)
+
+def cari_anggota(id):
+    anggota = df[df["ID"] == id]
+    if not anggota.empty:
+        return anggota
+    else:
+        return f"Tidak ada anggota dengan ID {id}"
+
+print("\n=== Cari Anggota ID=2 ===")
+print(cari_anggota(2))
+
+print("\n=== Jumlah Anggota ===")
+print(len(df))
+
+data_baru = {"ID": 4, "Nama": "Dewi", "NIM": 123459}
+df = pd.concat([df, pd.DataFrame([data_baru])], ignore_index=True)
+
+print("\n=== Data Setelah Tambah Anggota Baru ===")
+print(df)
+
+df.to_csv("data.csv", index=False, sep=";")
